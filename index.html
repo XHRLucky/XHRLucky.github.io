@@ -3,55 +3,283 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Huirui Xu</title>
+  <meta name="theme-color" content="#070910">
+  <meta name="description" content="Huirui Xu — agent systems, language models, and the research behind them.">
+  <title>XHR / Huirui Xu — Researching the next move</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
     :root {
-      color-scheme: light;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #1f2933;
-      background: #f7f8fb;
+      --ink: #f2f4ef;
+      --muted: #9298a7;
+      --line: rgba(255,255,255,.12);
+      --panel: rgba(12, 15, 24, .68);
+      --lime: #d7ff65;
+      --blue: #88a8ff;
+      --pink: #f5a8dc;
+      --bg: #070910;
+      --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: var(--sans);
+      overflow-x: hidden;
     }
-    main {
-      width: min(720px, 100%);
-      background: #ffffff;
-      border: 1px solid #d8dee8;
-      border-radius: 8px;
-      padding: 36px;
-      box-shadow: 0 12px 32px rgba(31, 41, 51, 0.08);
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+      opacity: .055;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+      mix-blend-mode: screen;
     }
-    h1 {
-      margin: 0 0 12px;
-      font-size: 2.25rem;
-      line-height: 1.15;
+    ::selection { background: var(--lime); color: #06070b; }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1240px, calc(100% - 48px)); margin: 0 auto; position: relative; z-index: 2; }
+
+    #space { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; }
+    .nebula { position: fixed; z-index: 1; pointer-events: none; filter: blur(12px); opacity: .68; }
+    .nebula.one { width: 540px; height: 540px; top: -270px; right: -160px; background: radial-gradient(circle, rgba(117, 105, 255, .32), transparent 66%); }
+    .nebula.two { width: 620px; height: 450px; bottom: 8%; left: -310px; background: radial-gradient(circle, rgba(5, 188, 219, .2), transparent 68%); }
+
+    header { height: 82px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 3; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 13px; letter-spacing: .06em; }
+    .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--lime); border-radius: 50%; color: var(--lime); font-weight: 500; font-size: 12px; box-shadow: 0 0 22px rgba(215,255,101,.17); }
+    nav { display: flex; align-items: center; gap: 28px; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+    nav a { transition: color .25s ease; }
+    nav a:hover { color: var(--ink); }
+    .nav-cta { color: var(--bg); background: var(--lime); padding: 11px 15px; border-radius: 2px; transition: transform .25s ease, box-shadow .25s ease; }
+    .nav-cta:hover { color: var(--bg); transform: translateY(-2px); box-shadow: 0 7px 28px rgba(215,255,101,.22); }
+
+    .hero { min-height: calc(100vh - 82px); display: flex; align-items: center; position: relative; padding: 72px 0 112px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(340px, .88fr); gap: 56px; align-items: center; width: 100%; }
+    .eyebrow { display: flex; align-items: center; gap: 11px; margin-bottom: 24px; font: 11px var(--mono); color: var(--lime); letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow::before { content: ''; width: 35px; height: 1px; background: var(--lime); box-shadow: 0 0 12px var(--lime); }
+    h1 { margin: 0; max-width: 800px; font-size: clamp(4.3rem, 10vw, 9.3rem); line-height: .83; letter-spacing: -.085em; font-weight: 800; text-transform: uppercase; }
+    h1 span { color: transparent; -webkit-text-stroke: 1px rgba(242,244,239,.54); }
+    .hero-copy { max-width: 520px; margin: 32px 0 0; color: #aeb4c2; font-size: 16px; line-height: 1.7; }
+    .hero-copy strong { color: var(--ink); font-weight: 600; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+    .button { display: inline-flex; align-items: center; gap: 11px; padding: 14px 18px; border: 1px solid var(--line); font: 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; transition: all .3s ease; }
+    .button.primary { color: var(--bg); background: var(--lime); border-color: var(--lime); }
+    .button.primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(215,255,101,.23); }
+    .button.secondary:hover { border-color: var(--pink); color: var(--pink); }
+    .arrow { font-size: 16px; line-height: 0; }
+
+    .console { position: relative; min-height: 465px; border: 1px solid rgba(255,255,255,.15); background: linear-gradient(145deg, rgba(19, 24, 37, .9), rgba(7, 9, 16, .58)); box-shadow: 0 30px 100px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.07); overflow: hidden; transform: perspective(1100px) rotateY(-4deg) rotateX(2deg); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+    .console:hover { transform: perspective(1100px) rotateY(0) rotateX(0) translateY(-4px); }
+    .console::before { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 15%, rgba(215,255,101,.08) 43%, transparent 69%); transform: translateX(-110%); animation: sweep 8s ease-in-out infinite; }
+    .console-bar { height: 42px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 7px; padding: 0 16px; color: var(--muted); font: 10px var(--mono); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #5e6472; }
+    .dot.live { background: var(--lime); box-shadow: 0 0 10px var(--lime); }
+    .console-label { margin-left: auto; letter-spacing: .1em; }
+    .console-body { padding: 29px; }
+    .console-kicker { color: var(--blue); font: 11px var(--mono); letter-spacing: .1em; }
+    .console-title { margin: 13px 0 23px; max-width: 380px; font-size: clamp(2rem, 4vw, 3.4rem); line-height: .98; letter-spacing: -.06em; font-weight: 700; }
+    .console-title em { color: var(--lime); font-style: normal; }
+    .meter { margin: 26px 0 28px; }
+    .meter-row { display: flex; justify-content: space-between; color: var(--muted); font: 10px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .meter-track { height: 3px; margin-top: 10px; background: rgba(255,255,255,.12); overflow: hidden; }
+    .meter-track i { display: block; height: 100%; width: 76%; background: linear-gradient(90deg, var(--blue), var(--lime)); animation: pulse-width 4s ease-in-out infinite alternate; }
+    .console-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; padding-top: 21px; border-top: 1px solid var(--line); }
+    .meta-label { display: block; margin-bottom: 7px; color: var(--muted); font: 9px var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .meta-value { font-size: 13px; color: var(--ink); }
+    .signal { position: absolute; right: 24px; bottom: 27px; width: 95px; height: 56px; opacity: .9; }
+    .signal svg { width: 100%; height: 100%; overflow: visible; }
+    .signal path { fill: none; stroke: var(--pink); stroke-width: 1; stroke-dasharray: 2 4; animation: dash 6s linear infinite; }
+
+    .ticker { border-block: 1px solid var(--line); overflow: hidden; position: relative; z-index: 2; white-space: nowrap; }
+    .ticker-track { display: inline-flex; gap: 32px; padding: 16px 0; min-width: max-content; animation: ticker 28s linear infinite; color: var(--muted); font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .ticker b { color: var(--lime); font-weight: 400; }
+
+    section { position: relative; z-index: 2; padding: 148px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 50px; }
+    .section-index { color: var(--lime); font: 11px var(--mono); letter-spacing: .1em; }
+    h2 { margin: 10px 0 0; font-size: clamp(2.5rem, 5.5vw, 5.2rem); line-height: .91; letter-spacing: -.075em; text-transform: uppercase; }
+    .section-intro { max-width: 310px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .research-card { min-height: 285px; padding: 27px; background: rgba(7,9,16,.75); position: relative; transition: background .35s ease, transform .35s ease; }
+    .research-card:hover { background: rgba(31,37,51,.72); transform: translateY(-5px); z-index: 1; }
+    .card-no { color: var(--muted); font: 10px var(--mono); }
+    .card-icon { position: absolute; top: 24px; right: 24px; color: var(--blue); font-size: 22px; }
+    .research-card h3 { margin: 74px 0 13px; font-size: 24px; line-height: 1; letter-spacing: -.05em; }
+    .research-card p { margin: 0; max-width: 245px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .card-tag { position: absolute; bottom: 25px; left: 27px; color: var(--lime); font: 10px var(--mono); letter-spacing: .06em; }
+
+    .lab { display: grid; grid-template-columns: .92fr 1.08fr; gap: 75px; align-items: start; }
+    .lab-copy p { max-width: 460px; color: #aeb4c2; font-size: 16px; line-height: 1.8; }
+    .lab-copy p + p { color: var(--muted); font-size: 13px; }
+    .principles { border-top: 1px solid var(--line); }
+    .principle { display: grid; grid-template-columns: 52px 1fr 20px; gap: 20px; align-items: center; padding: 23px 0; border-bottom: 1px solid var(--line); transition: padding .3s ease; }
+    .principle:hover { padding-left: 10px; }
+    .principle-no { color: var(--lime); font: 11px var(--mono); }
+    .principle h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.03em; }
+    .principle p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .principle-arrow { color: var(--muted); font-size: 19px; }
+
+    .contact { padding-bottom: 115px; }
+    .contact-box { position: relative; min-height: 365px; display: flex; flex-direction: column; justify-content: space-between; padding: 36px; border: 1px solid rgba(215,255,101,.35); background: linear-gradient(120deg, rgba(215,255,101,.09), rgba(136,168,255,.06) 40%, rgba(245,168,220,.07)); overflow: hidden; }
+    .contact-box::after { content: ''; position: absolute; width: 440px; height: 440px; right: -150px; bottom: -260px; border: 1px solid rgba(215,255,101,.33); border-radius: 50%; box-shadow: 0 0 0 32px rgba(215,255,101,.05), 0 0 0 64px rgba(215,255,101,.035), 0 0 0 96px rgba(215,255,101,.02); }
+    .contact-box h2 { max-width: 780px; font-size: clamp(3.5rem, 8vw, 8.5rem); }
+    .contact-bottom { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+    .contact-note { max-width: 300px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .contact-link { color: var(--lime); font: 12px var(--mono); border-bottom: 1px solid var(--lime); padding-bottom: 5px; }
+
+    footer { position: relative; z-index: 2; border-top: 1px solid var(--line); padding: 23px 0 32px; color: var(--muted); font: 10px var(--mono); letter-spacing: .04em; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; }
+    .footer-row a:hover { color: var(--ink); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes sweep { 0%, 65% { transform: translateX(-110%); } 90%, 100% { transform: translateX(110%); } }
+    @keyframes pulse-width { 0% { width: 62%; } 100% { width: 88%; } }
+    @keyframes dash { to { stroke-dashoffset: -90; } }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    @media (max-width: 820px) {
+      .shell { width: min(100% - 32px, 620px); }
+      header { height: 70px; }
+      nav a:not(.nav-cta) { display: none; }
+      .hero { padding: 52px 0 88px; }
+      .hero-grid, .lab { grid-template-columns: 1fr; gap: 53px; }
+      h1 { font-size: clamp(4rem, 18vw, 7rem); }
+      .console { min-height: 410px; transform: none; }
+      .section-head { display: block; }
+      .section-intro { margin-top: 22px; }
+      section { padding: 100px 0; }
+      .research-grid { grid-template-columns: 1fr; }
+      .research-card { min-height: 245px; }
+      .contact-box { min-height: 430px; padding: 25px; }
+      .contact-bottom, .footer-row { align-items: start; flex-direction: column; }
     }
-    p {
-      margin: 10px 0;
-      font-size: 1rem;
-      line-height: 1.65;
-    }
-    .label {
-      font-weight: 650;
-    }
-    a {
-      color: #2457a7;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Huirui Xu</h1>
-    <p><span class="label">Affiliation:</span> Institute of Automation, Chinese Academy of Sciences</p>
-    <p><span class="label">Email:</span> <a href="mailto:xuhuirui2025@ia.ac.cn">xuhuirui2025@ia.ac.cn</a></p>
-    <p><span class="label">Research interests:</span> LMM Agent, AutoResearch agents, NLP,Post Train.</p>
-    <p><span class="label">GitHub:</span> <a href="https://github.com/XHRLucky">https://github.com/XHRLucky</a></p>
-  </main>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div class="nebula one" aria-hidden="true"></div>
+  <div class="nebula two" aria-hidden="true"></div>
+
+  <div class="shell">
+    <header>
+      <a class="brand" href="#top" aria-label="XHR home"><span class="brand-mark">X</span><span>XHR / RESEARCH LOG</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#signal">Signal</a>
+        <a href="#lab">Lab notes</a>
+        <a class="nav-cta" href="https://github.com/XHRLucky" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="reveal">
+            <div class="eyebrow">Independent research unit / 2025—∞</div>
+            <h1>Huirui<br><span>Xu</span></h1>
+            <p class="hero-copy">I study the space between <strong>language models</strong> and useful action — building agents that can explore, reason, and ship with intent.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#signal">Enter the lab <span class="arrow">↘</span></a>
+              <a class="button secondary" href="mailto:xuhuirui2025@ia.ac.cn">Say hello <span class="arrow">↗</span></a>
+            </div>
+          </div>
+
+          <aside class="console reveal" aria-label="Research status">
+            <div class="console-bar"><i class="dot live"></i><i class="dot"></i><i class="dot"></i><span class="console-label">LIVE / ORBIT 01</span></div>
+            <div class="console-body">
+              <div class="console-kicker">CURRENT TRAJECTORY</div>
+              <div class="console-title">Researching<br>the <em>next move.</em></div>
+              <div class="meter"><div class="meter-row"><span>Signal strength</span><span>76.4%</span></div><div class="meter-track"><i></i></div></div>
+              <div class="console-meta">
+                <div><span class="meta-label">Base</span><span class="meta-value">Institute of Automation, CAS</span></div>
+                <div><span class="meta-label">Focus</span><span class="meta-value">Agentic systems</span></div>
+              </div>
+            </div>
+            <div class="signal" aria-hidden="true"><svg viewBox="0 0 100 60"><path d="M0 39 C8 39 8 16 17 16 S25 51 35 51 43 8 54 8 60 37 70 37 78 23 86 23 91 43 100 43"/></svg></div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="ticker" aria-label="Research topics">
+        <div class="ticker-track"><b>✦</b> LMM AGENTS <b>✦</b> AUTORESEARCH <b>✦</b> NLP <b>✦</b> POST-TRAINING <b>✦</b> OPEN SOURCE <b>✦</b> LMM AGENTS <b>✦</b> AUTORESEARCH <b>✦</b> NLP <b>✦</b> POST-TRAINING <b>✦</b> OPEN SOURCE <b>✦</b></div>
+      </div>
+
+      <section id="signal" class="reveal">
+        <div class="section-head">
+          <div><div class="section-index">01 / SIGNAL MAP</div><h2>What I’m<br>exploring</h2></div>
+          <p class="section-intro">A working map of questions, systems, and experiments at the edge of intelligent software.</p>
+        </div>
+        <div class="research-grid">
+          <article class="research-card"><span class="card-no">NODE / 001</span><span class="card-icon">◌</span><h3>Agent<br>systems</h3><p>Designing language-model agents that turn open-ended goals into reliable, verifiable work.</p><span class="card-tag">PLAN → ACT → LEARN</span></article>
+          <article class="research-card"><span class="card-no">NODE / 002</span><span class="card-icon">⌁</span><h3>Auto<br>research</h3><p>Building loops that help models discover better ideas, run experiments, and learn from evidence.</p><span class="card-tag">SEARCH / SYNTHESIZE</span></article>
+          <article class="research-card"><span class="card-no">NODE / 003</span><span class="card-icon">✳</span><h3>Language<br>models</h3><p>Exploring post-training, evaluation, and the small details that make intelligence useful.</p><span class="card-tag">ALIGN → ADAPT</span></article>
+        </div>
+      </section>
+
+      <section id="lab" class="lab reveal">
+        <div class="lab-copy"><div class="section-index">02 / LAB NOTES</div><h2>Make the<br>unknown<br>legible.</h2><p>My work lives where research meets implementation. I like questions that become tools, and tools that create better questions.</p><p>Currently at the Institute of Automation, Chinese Academy of Sciences. The fastest way to find what I’m building is through the links below.</p></div>
+        <div class="principles">
+          <a class="principle" href="https://github.com/XHRLucky" target="_blank" rel="noreferrer"><span class="principle-no">01</span><div><h3>Open work</h3><p>Experiments, prototypes, and the occasional useful rabbit hole.</p></div><span class="principle-arrow">↗</span></a>
+          <a class="principle" href="mailto:xuhuirui2025@ia.ac.cn"><span class="principle-no">02</span><div><h3>Good questions</h3><p>For research, collaboration, or a thoughtful hello.</p></div><span class="principle-arrow">↗</span></a>
+          <div class="principle"><span class="principle-no">03</span><div><h3>Long horizon</h3><p>Building systems that stay useful after the demo ends.</p></div><span class="principle-arrow">∞</span></div>
+        </div>
+      </section>
+
+      <section class="contact reveal"><div class="contact-box"><div class="section-index">03 / ESTABLISH CONTACT</div><h2>Let’s make<br>something<br><span>move.</span></h2><div class="contact-bottom"><p class="contact-note">If you’re thinking about agents, language models, or a problem that refuses to stay simple, I’d like to hear about it.</p><a class="contact-link" href="mailto:xuhuirui2025@ia.ac.cn">xuhuirui2025@ia.ac.cn ↗</a></div></div></section>
+    </main>
+
+    <footer><div class="footer-row"><span>© 2025 HUIRUI XU / ALL SYSTEMS NOMINAL</span><span><a href="https://github.com/XHRLucky" target="_blank" rel="noreferrer">GITHUB</a> · <a href="#top">BACK TO TOP ↑</a></span></div></footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('space');
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let width = 0, height = 0, dpr = 1, particles = [], pointer = { x: -1000, y: -1000 };
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth; height = window.innerHeight;
+      canvas.width = width * dpr; canvas.height = height * dpr;
+      canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(175, Math.floor((width * height) / 8500));
+      particles = Array.from({ length: count }, (_, i) => ({
+        x: Math.random() * width, y: Math.random() * height,
+        vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
+        r: Math.random() * 1.4 + .25, a: Math.random() * .7 + .15,
+        hue: i % 5 === 0 ? '215,255,101' : (i % 4 === 0 ? '136,168,255' : '255,255,255')
+      }));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of particles) {
+        if (!reduceMotion) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < -5) p.x = width + 5; if (p.x > width + 5) p.x = -5;
+          if (p.y < -5) p.y = height + 5; if (p.y > height + 5) p.y = -5;
+          const dx = pointer.x - p.x, dy = pointer.y - p.y, distance = Math.hypot(dx, dy);
+          if (distance < 150) { p.x -= dx / distance * .35; p.y -= dy / distance * .35; }
+        }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${p.hue},${p.a})`; ctx.fill();
+      }
+      if (!reduceMotion) requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    window.addEventListener('pointermove', (e) => { pointer.x = e.clientX; pointer.y = e.clientY; }, { passive: true });
+    resize(); draw();
+
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), { threshold: .14 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>

@@ -119,6 +119,26 @@ h2 { font-size: clamp(36px, 5vw, 72px); letter-spacing: -.045em; }
 .contact-bottom p { font-size: 17px; color: #444746; }
 .contact-email { font-size: 18px; }
 .js .reveal { transition-delay: var(--d, 0s); }
+/* v4: research card illustrations (hand-made SVG) */
+.interest-card { min-height: 340px; }
+.interest-bar { opacity: .32; width: 260px; height: 260px; right: -50px; top: -50px; filter: blur(18px); }
+.interest-icon { position: absolute; right: 28px; top: 26px; width: clamp(110px, 11vw, 150px); height: auto; filter: drop-shadow(0 10px 18px rgba(31,31,31,.08)); transition: transform .7s var(--ease); }
+.interest-card:hover .interest-icon { transform: translateY(-6px) scale(1.05); }
+.interest-icon .spin, .interest-icon .spin-rev { transform-origin: 60px 60px; transform-box: view-box; }
+.interest-card:hover .spin { animation: spin 3.2s linear infinite; }
+.interest-card:hover .spin-rev { animation: spin 2.4s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spark { transform-origin: 52px 50px; transform-box: view-box; animation: twinkle 2.8s ease-in-out infinite; }
+.spark2 { animation: twinkle 2.8s ease-in-out .9s infinite; transform-origin: 92px 26px; transform-box: view-box; }
+.spark3 { animation: twinkle 2.8s ease-in-out 1.6s infinite; transform-origin: 104px 46px; transform-box: view-box; }
+@keyframes twinkle { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(.7) rotate(25deg); } }
+.layer { transition: transform .7s var(--ease); }
+.interest-card:hover .l1 { transform: translateY(-10px); }
+.interest-card:hover .l2 { transform: translateY(-5px); }
+/* entrance: icons draw/settle when the card reveals */
+.js .interest-card.reveal .interest-icon { opacity: 0; transform: translateY(18px) scale(.9); transition: opacity .9s var(--ease) calc(var(--d) + .25s), transform .9s var(--ease) calc(var(--d) + .25s); }
+.js .interest-card.reveal.in .interest-icon { opacity: 1; transform: none; }
+.js .interest-card.reveal.in:hover .interest-icon { transform: translateY(-6px) scale(1.05); transition-delay: 0s; }
 @media (max-width: 760px) {
   .wrap { width: calc(100% - 40px); }
   .nav { height: 64px; gap: 16px; padding-inline: 20px; }
@@ -147,7 +167,8 @@ h2 { font-size: clamp(36px, 5vw, 72px); letter-spacing: -.045em; }
   footer > span:nth-child(2) { display: none; }
   .wrap { width: calc(100% - 40px); }
   .interest-grid { grid-template-columns: 1fr; }
-  .interest-card { min-height: 190px; }
+  .interest-card { min-height: 220px; }
+  .interest-icon { width: 104px; right: 22px; top: 20px; }
   .education.section { grid-template-columns: 1fr; }
   .edu-side { position: static; }
   .education-row { padding: 24px; }
@@ -158,4 +179,5 @@ h2 { font-size: clamp(36px, 5vw, 72px); letter-spacing: -.045em; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .intro > *, .js .reveal, .hero-content, .contact { opacity: 1 !important; transform: none !important; }
   .js [data-words] .w { opacity: 1 !important; }
+  .js .interest-card .interest-icon { opacity: 1 !important; transform: none !important; }
 }

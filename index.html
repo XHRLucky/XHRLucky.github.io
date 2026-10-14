@@ -8,9 +8,10 @@
   <title>Huirui Xu — Research &amp; Learning Systems</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   <script src="assets/flow.js" defer></script>
+  <script src="assets/scroll.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#about">Skip to content</a>
@@ -22,12 +23,12 @@
   <main>
     <section class="hero" id="about" aria-labelledby="name">
       <canvas id="flow" aria-hidden="true"></canvas>
-      <div class="hero-content">
+      <div class="hero-content intro">
         <p class="kicker">Hello, I’m</p>
         <h1 id="name">Huirui Xu<span class="name-dot">.</span></h1>
         <p class="hero-role">Master’s student in<br><strong>Pattern Recognition and Intelligent Systems</strong></p>
         <p class="hero-affiliation">Institute of Automation, Chinese Academy of Sciences</p>
-        <div class="research" id="research" aria-label="Research interests">
+        <div class="research" aria-label="Research interests">
           <span class="research-label">Research interests</span>
           <p>RSI <span aria-hidden="true">·</span> AutoResearch <span aria-hidden="true">·</span> Continual Learning</p>
         </div>
@@ -39,17 +40,36 @@
       </div>
       <div class="hero-bottom"><span class="flow-hint">Move your cursor. Follow the flow.</span><a href="#education" class="scroll-link">Education ↓</a><button class="motion-toggle" type="button" aria-pressed="false" aria-controls="flow" hidden>Pause motion</button></div>
     </section>
+    <section class="statement" aria-label="Profile summary">
+      <div class="wrap statement-inner">
+        <p class="section-label"><span class="num">01</span> About</p>
+        <p class="statement-text" data-words>Huirui Xu — Master’s student in Pattern Recognition and Intelligent Systems at the Institute of Automation, Chinese Academy of Sciences.</p>
+      </div>
+    </section>
+
+    <section class="research-section" id="research" aria-labelledby="research-title">
+      <div class="marquee" aria-hidden="true"><div class="marquee-track" data-shift>RSI <i>✳</i> AutoResearch <i>✳</i> Continual Learning <i>✳</i> RSI <i>✳</i> AutoResearch <i>✳</i> Continual Learning <i>✳</i></div></div>
+      <div class="wrap">
+        <div class="section-header"><div><p class="section-label"><span class="num">02</span> Research</p><h2 id="research-title">Research interests</h2></div></div>
+        <ol class="interest-grid">
+          <li class="interest-card reveal" style="--d:0s"><span class="interest-num">01</span><span class="interest-name">RSI</span><span class="interest-bar b1"></span><svg class="interest-icon" viewBox="0 0 120 120" aria-hidden="true"><g class="spin" fill="none" stroke="#4285f4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M98 60a38 38 0 1 1-11.1-26.9"/><path d="M90 18v16H74"/></g><g class="spin-rev" fill="none" stroke="#1a73e8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".55"><path d="M42 60a18 18 0 1 0 5.3-12.7"/><path d="M46 38v10h10"/></g><circle cx="60" cy="60" r="4.5" fill="#4285f4"/></svg></li>
+          <li class="interest-card reveal" style="--d:.1s"><span class="interest-num">02</span><span class="interest-name">AutoResearch</span><span class="interest-bar b2"></span><svg class="interest-icon" viewBox="0 0 120 120" aria-hidden="true"><circle cx="52" cy="52" r="32" fill="#fff" fill-opacity=".55" stroke="#ea4335" stroke-width="6"/><path d="M76 76l24 24" stroke="#ea4335" stroke-width="9" stroke-linecap="round"/><path class="spark" d="M52 34c1.6 9.2 6.8 14.4 16 16-9.2 1.6-14.4 6.8-16 16-1.6-9.2-6.8-14.4-16-16 9.2-1.6 14.4-6.8 16-16z" fill="#fbbc04"/><circle class="spark2" cx="92" cy="26" r="5" fill="#ea4335" opacity=".7"/><circle class="spark3" cx="104" cy="46" r="3" fill="#fbbc04"/></svg></li>
+          <li class="interest-card reveal" style="--d:.2s"><span class="interest-num">03</span><span class="interest-name">Continual Learning</span><span class="interest-bar b3"></span><svg class="interest-icon" viewBox="0 0 120 120" aria-hidden="true"><g stroke-linejoin="round" stroke-width="5"><path class="layer l3" d="M60 78l42 -18 -42 -18 -42 18z" fill="#e6f4ea" stroke="#34a853" opacity=".55"/><path class="layer l2" d="M60 64l42 -18 -42 -18 -42 18z" fill="#ceead6" stroke="#34a853" opacity=".8"/><path class="layer l1" d="M60 50l42 -18 -42 -18 -42 18z" fill="#fff" stroke="#34a853"/></g><path d="M24 98c12-10 24-10 36 0s24 10 36 0" fill="none" stroke="#188038" stroke-width="5" stroke-linecap="round" opacity=".6"/></svg></li>
+        </ol>
+      </div>
+    </section>
+
     <div class="wrap">
       <section class="education section" id="education">
-        <div class="section-header"><div><p class="section-label">02 / Education</p><h2>Where I learned</h2></div><p class="section-desc">A path from Xintai to Xi’an, and now into research.</p></div>
+        <div class="edu-side"><div class="section-header"><div><p class="section-label"><span class="num">03</span> Education</p><h2>Where I learned</h2></div><p class="section-desc">A path from Xintai to Xi’an, and now into research.</p></div><div class="edu-progress" aria-hidden="true"><span data-progress></span></div></div>
         <div class="education-list">
-          <div class="education-row"><div class="education-year">2017 — 2020</div><div class="education-school">Xintai No. 1 High School<small>新泰市第一中学</small></div><div class="education-degree">High school</div></div>
-          <div class="education-row"><div class="education-year">2020 — 2024</div><div class="education-school">Xi’an Jiaotong University<small>西安交通大学</small></div><div class="education-degree">Bachelor’s degree in Automation</div></div>
-          <div class="education-row"><div class="education-year">2025 — present</div><div class="education-school">Institute of Automation, CAS<small>中国科学院自动化研究所</small></div><div class="education-degree">Master’s in Pattern Recognition and Intelligent Systems</div></div>
+          <div class="education-row reveal"><div class="education-year">2017 — 2020</div><div class="education-school">Xintai No. 1 High School<small>新泰市第一中学</small></div><div class="education-degree">High school</div></div>
+          <div class="education-row reveal"><div class="education-year">2020 — 2024</div><div class="education-school">Xi’an Jiaotong University<small>西安交通大学</small></div><div class="education-degree">Bachelor’s degree in Automation</div></div>
+          <div class="education-row reveal"><div class="education-year">2025 — present</div><div class="education-school">Institute of Automation, CAS<small>中国科学院自动化研究所</small></div><div class="education-degree">Master’s in Pattern Recognition and Intelligent Systems</div></div>
         </div>
       </section>
 
-      <section class="contact" id="contact"><div class="contact-label">03 / Say hello</div><h2>Let’s keep the <em>curiosity</em> moving.</h2><div class="contact-bottom"><p>For research conversations, collaboration, or a good question about learning systems.</p><a class="contact-email" href="mailto:xuhuirui2025@ia.ac.cn">xuhuirui2025@ia.ac.cn ↗</a></div></section>
+      <section class="contact" id="contact"><div class="contact-label"><span class="num">04</span> Say hello</div><h2 data-words>Let’s keep the <em>curiosity</em> moving.</h2><div class="contact-bottom"><p>For research conversations, collaboration, or a good question about learning systems.</p><a class="contact-email" href="mailto:xuhuirui2025@ia.ac.cn">xuhuirui2025@ia.ac.cn ↗</a></div></section>
     </div>
   </main>
   <footer class="wrap"><span>© <span id="year">2026</span> Huirui Xu</span><span>Pattern Recognition · Intelligent Systems</span><a href="#about">Back to top ↑</a></footer>

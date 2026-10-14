@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#0b0c10">
   <meta name="description" content="Huirui Xu — Master's student in Pattern Recognition and Intelligent Systems at the Institute of Automation, Chinese Academy of Sciences.">
   <title>Huirui Xu — Research &amp; Learning Systems</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   <script src="assets/flow.js" defer></script>
 </head>
@@ -21,10 +21,11 @@
   </header>
   <main>
     <section class="hero" id="about" aria-labelledby="name">
+      <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
       <canvas id="flow" aria-hidden="true"></canvas>
-      <div class="hero-content">
+      <div class="hero-content intro">
         <p class="kicker">Hello, I’m</p>
-        <h1 id="name">Huirui Xu<span class="name-dot">.</span></h1>
+        <h1 id="name"><span class="gradient-text">Huirui Xu</span><span class="name-dot">.</span></h1>
         <p class="hero-role">Master’s student in<br><strong>Pattern Recognition and Intelligent Systems</strong></p>
         <p class="hero-affiliation">Institute of Automation, Chinese Academy of Sciences</p>
         <div class="research" id="research" aria-label="Research interests">
@@ -40,7 +41,7 @@
       <div class="hero-bottom"><span class="flow-hint">Move your cursor. Follow the flow.</span><a href="#education" class="scroll-link">Education ↓</a><button class="motion-toggle" type="button" aria-pressed="false" aria-controls="flow" hidden>Pause motion</button></div>
     </section>
     <div class="wrap">
-      <section class="education section" id="education">
+      <section class="education section reveal" id="education">
         <div class="section-header"><div><p class="section-label">02 / Education</p><h2>Where I learned</h2></div><p class="section-desc">A path from Xintai to Xi’an, and now into research.</p></div>
         <div class="education-list">
           <div class="education-row"><div class="education-year">2017 — 2020</div><div class="education-school">Xintai No. 1 High School<small>新泰市第一中学</small></div><div class="education-degree">High school</div></div>
@@ -49,7 +50,7 @@
         </div>
       </section>
 
-      <section class="contact" id="contact"><div class="contact-label">03 / Say hello</div><h2>Let’s keep the <em>curiosity</em> moving.</h2><div class="contact-bottom"><p>For research conversations, collaboration, or a good question about learning systems.</p><a class="contact-email" href="mailto:xuhuirui2025@ia.ac.cn">xuhuirui2025@ia.ac.cn ↗</a></div></section>
+      <section class="contact reveal" id="contact"><div class="contact-label">03 / Say hello</div><h2>Let’s keep the <em>curiosity</em> moving.</h2><div class="contact-bottom"><p>For research conversations, collaboration, or a good question about learning systems.</p><a class="contact-email" href="mailto:xuhuirui2025@ia.ac.cn">xuhuirui2025@ia.ac.cn ↗</a></div></section>
     </div>
   </main>
   <footer class="wrap"><span>© <span id="year">2026</span> Huirui Xu</span><span>Pattern Recognition · Intelligent Systems</span><a href="#about">Back to top ↑</a></footer>
